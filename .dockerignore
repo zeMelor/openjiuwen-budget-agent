@@ -1,0 +1,6 @@
+# В образ попадает только явно перечисленное: так .env с ключом и прочее туда не уедут.
+*
+!requirements.lock
+!run_agent.py
+!budget_agent/
+**/__pycache__

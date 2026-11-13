@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 277, "completion": 22, "content": "Quinn Smith -> mentor Dmitri Petrov -> born 1992\n1992", "tool_calls": []}
+{"kind": "harness", "note": "direct search answer '1992'"}

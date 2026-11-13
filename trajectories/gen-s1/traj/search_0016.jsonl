@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 156, "completion": 21, "content": "Kira Novak -> employer Helix Motors -> headquarters [not found]\nUNANSWERABLE", "tool_calls": []}
+{"kind": "harness", "note": "direct search answer 'UNANSWERABLE'"}

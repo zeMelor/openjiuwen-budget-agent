@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 245, "completion": 12, "content": "Dmitri Garcia -> born\n1970", "tool_calls": []}
+{"kind": "harness", "note": "direct search answer '1970'"}

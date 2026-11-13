@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 275, "completion": 22, "content": "Kira Ivanova -> mentor Alice Ivanova -> born 1995\n1995", "tool_calls": []}
+{"kind": "harness", "note": "direct search answer '1995'"}

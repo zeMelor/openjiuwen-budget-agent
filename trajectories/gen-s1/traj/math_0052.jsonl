@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 205, "completion": 28, "content": "boxes = 2007\nboxes *= 2\nboxes *= 2\nboxes *= 2\nprint(boxes)", "tool_calls": []}
+{"kind": "harness", "note": "compute run rc=0 answer='16056' err=''"}

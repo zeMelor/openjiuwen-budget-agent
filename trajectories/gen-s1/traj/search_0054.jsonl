@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 242, "completion": 17, "content": "Kira Haddad -> employer Ember Bio -> headquarters Lisbon\nLisbon", "tool_calls": []}
+{"kind": "harness", "note": "direct search answer 'Lisbon'"}

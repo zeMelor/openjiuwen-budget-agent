@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 287, "completion": 5, "content": "UNANSWERABLE", "tool_calls": []}
+{"kind": "harness", "note": "compute: model says unanswerable"}

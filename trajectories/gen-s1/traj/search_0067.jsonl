@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 252, "completion": 16, "content": "Tanya Ivanova -> employer Granite AI -> headquarters Turku\nTurku", "tool_calls": []}
+{"kind": "harness", "note": "direct search answer 'Turku'"}

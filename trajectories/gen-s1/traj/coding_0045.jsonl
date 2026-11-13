@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 461, "completion": 72, "content": "```python\ndef count_even(xs):\n    return sum(1 for x in xs if x % 2 == 0)\n\n\ndef first_n(xs, n):\n    return xs[:n]\n\n\ndef total(xs):\n    s = 0\n    for x in xs:\n        s += x\n    return s\n```", "tool_calls": []}
+{"kind": "harness", "note": "fast round 0 (qwen3.8-27b-noreason): failures (3, 0) -> (0, 0), whole change of ['mylib.py']"}

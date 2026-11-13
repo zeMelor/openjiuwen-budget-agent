@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 489, "completion": 93, "content": "```python\ndef reverse_words(s):\n    return ' '.join(reversed(s.split()))\n\n\ndef maximum(xs):\n    best = xs[0]\n    for x in xs:\n        if x > best:\n            best = x\n    return best\n\n\ndef clamp(x, lo, hi):\n    return max(lo, min(x, hi))\n\n\ndef average(xs):\n    return sum(xs) / len(xs)\n```", "tool_calls": []}
+{"kind": "harness", "note": "fast round 0 (qwen3.8-27b-noreason): failures (4, 0) -> (0, 0), whole change of ['mylib.py']"}

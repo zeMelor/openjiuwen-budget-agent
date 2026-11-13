@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 207, "completion": 52, "content": "import csv\nr=csv.reader(open('sales.csv'))\nh=next(r)\nc=sum(int(row[4]) for row in r if row[2]=='sprocket' and int(row[3])==10)\nprint(c)", "tool_calls": []}
+{"kind": "harness", "note": "compute run rc=0 answer='34' err=''"}

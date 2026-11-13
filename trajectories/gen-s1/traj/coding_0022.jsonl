@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 323, "completion": 22, "content": "```python\ndef reverse_words(s):\n    return ' '.join(reversed(s.split()))\n```", "tool_calls": []}
+{"kind": "harness", "note": "fast round 0 (qwen3.8-27b-noreason): failures (1, 0) -> (0, 0), whole change of ['mylib.py']"}

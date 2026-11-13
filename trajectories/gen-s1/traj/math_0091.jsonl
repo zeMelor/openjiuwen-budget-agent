@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 259, "completion": 48, "content": "s = 1431\ns -= 31\ns -= 26 * 5\ns -= s // 4\ns -= 7 * 5\ns //= 3\nUNANSWERABLE", "tool_calls": []}
+{"kind": "harness", "note": "compute: model says unanswerable"}

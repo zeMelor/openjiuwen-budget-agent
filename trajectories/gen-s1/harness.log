@@ -1,0 +1,102 @@
+[harness 19:29:44] 100 tasks, budget 100000, model qwen3.8-27b-noreason, logs in /logs
+[harness 19:29:44] coding_0003: skip, infeasible: test_mylib.py: m.unique([3, 1, 3, 2, 1]) expected both [3, 1] and [3, 1, 2]
+[harness 19:29:44] coding_0023: skip, infeasible: test_mylib.py: m.is_palindrome('Level') must be both true and false
+[harness 19:29:44] coding_0036: skip, infeasible: test_mylib.py: m.word_count('a b  c') expected both 4 and 3
+[harness 19:29:45] coding_0062: skip, infeasible: test_mylib.py: m.average([2, 4, 6]) expected both 4 and 5
+[harness 19:29:45] coding_0068: skip, infeasible: test_mylib.py: m.average([2, 4, 6]) expected both 5 and 4
+[harness 19:29:45] coding_0077: skip, infeasible: test_mylib.py: m.unique([3, 1, 3, 2, 1]) expected both [3, 1] and [3, 1, 2]
+[harness 19:29:45] coding_0083: skip, infeasible: test_mylib.py: m.factorial(5) expected both 120 and 121
+[harness 19:29:45] data_analysis_0002: skip, infeasible: 'central' does not occur in the task files
+[harness 19:29:56] math_0011: answer answer='1794' cost=52 calls=1 spent=101
+[harness 19:29:56] math_0004: answer answer='969' cost=49 calls=1 spent=101
+[harness 19:29:57] math_0014: answer answer='2655' cost=109 calls=1 spent=210
+[harness 19:30:02] math_0027: answer answer='7664' cost=106 calls=1 spent=316
+[harness 19:30:06] math_0080: answer answer='1297' cost=106 calls=1 spent=422
+[harness 19:30:07] math_0089: answer answer='1894' cost=85 calls=1 spent=507
+[harness 19:30:09] math_0095: answer answer='1681' cost=46 calls=1 spent=554
+[harness 19:30:10] math_0005: answer answer='2514' cost=46 calls=1 spent=600
+[harness 19:30:11] math_0052: answer answer='16056' cost=48 calls=1 spent=648
+[harness 19:30:13] math_0075: answer answer='370' cost=62 calls=1 spent=710
+[harness 19:30:15] data_analysis_0001: answer answer='0' cost=112 calls=1 spent=822
+[harness 19:30:16] data_analysis_0007: answer answer='0' cost=88 calls=1 spent=910
+[harness 19:30:18] data_analysis_0059: answer answer='0' cost=105 calls=1 spent=1015
+[harness 19:30:19] data_analysis_0063: answer answer='32' cost=99 calls=1 spent=1114
+[harness 19:30:20] data_analysis_0082: answer answer='34' cost=73 calls=1 spent=1187
+[harness 19:30:21] data_analysis_0033: answer answer='20754' cost=90 calls=1 spent=1277
+[harness 19:30:22] math_0021: answer answer='314' cost=62 calls=1 spent=1339
+[harness 19:30:23] data_analysis_0043: answer answer='51' cost=83 calls=1 spent=1422
+[harness 19:30:24] data_analysis_0050: answer answer='139' cost=78 calls=1 spent=1584
+[harness 19:30:24] data_analysis_0069: answer answer='88' cost=84 calls=1 spent=1584
+[harness 19:30:25] data_analysis_0078: answer answer='20' cost=81 calls=1 spent=1665
+[harness 19:30:26] data_analysis_0076: answer answer='0' cost=99 calls=1 spent=1763
+[harness 19:30:28] math_0020: answer answer='541' cost=79 calls=1 spent=1888
+[harness 19:30:28] math_0041: answer answer='616' cost=45 calls=1 spent=1888
+[harness 19:30:30] math_0091: unanswerable answer=None cost=74 calls=1 spent=1962
+[harness 19:30:31] data_analysis_0009: answer answer='193' cost=103 calls=1 spent=2064
+[harness 19:30:32] data_analysis_0025: answer answer='396' cost=80 calls=1 spent=2144
+[harness 19:30:33] data_analysis_0074: answer answer='21927' cost=88 calls=1 spent=2232
+[harness 19:30:33] data_analysis_0037: answer answer='13' cost=104 calls=1 spent=2336
+[harness 19:30:34] data_analysis_0092: answer answer='36' cost=79 calls=1 spent=2416
+[harness 19:30:35] data_analysis_0097: answer answer='296' cost=80 calls=1 spent=2495
+[harness 19:30:35] math_0017: answer answer='2816' cost=48 calls=1 spent=2543
+[harness 19:30:36] math_0064: answer answer='1272' cost=50 calls=1 spent=2593
+[harness 19:30:37] math_0018: answer answer='679' cost=80 calls=1 spent=2673
+[harness 19:30:37] math_0065: answer answer='1540' cost=70 calls=1 spent=2743
+[harness 19:30:38] math_0081: unanswerable answer=None cost=34 calls=1 spent=2777
+[harness 19:30:40] coding_0029: answer answer='DONE' cost=95 calls=1 spent=3014
+[harness 19:30:40] coding_0028: answer answer='DONE' cost=142 calls=1 spent=3014
+[harness 19:30:41] coding_0057: answer answer='DONE' cost=92 calls=1 spent=3105
+[harness 19:30:42] coding_0038: answer answer='DONE' cost=125 calls=1 spent=3230
+[harness 19:30:44] coding_0035: answer answer='DONE' cost=132 calls=1 spent=3362
+[harness 19:30:44] coding_0030: answer answer='DONE' cost=122 calls=1 spent=3484
+[harness 19:30:45] coding_0039: answer answer='DONE' cost=96 calls=1 spent=3581
+[harness 19:30:46] coding_0044: answer answer='DONE' cost=108 calls=1 spent=3688
+[harness 19:30:46] coding_0048: answer answer='DONE' cost=108 calls=1 spent=3797
+[harness 19:30:47] coding_0056: answer answer='DONE' cost=136 calls=1 spent=3933
+[harness 19:30:49] coding_0090: answer answer='DONE' cost=91 calls=1 spent=4132
+[harness 19:30:49] coding_0093: answer answer='DONE' cost=108 calls=1 spent=4132
+[harness 19:30:51] data_analysis_0000: answer answer='24' cost=80 calls=1 spent=4211
+[harness 19:30:51] data_analysis_0019: answer answer='16537' cost=96 calls=1 spent=4307
+[harness 19:30:52] data_analysis_0070: answer answer='47' cost=83 calls=1 spent=4390
+[harness 19:30:52] data_analysis_0071: answer answer='1118' cost=89 calls=1 spent=4479
+[harness 19:30:53] data_analysis_0084: answer answer='155' cost=98 calls=1 spent=4577
+[harness 19:30:54] search_0054: answer answer='Lisbon' cost=41 calls=1 spent=4618
+[harness 19:30:54] search_0055: answer answer='1969' cost=35 calls=1 spent=4653
+[harness 19:30:55] search_0066: answer answer='Graz' cost=52 calls=1 spent=4705
+[harness 19:30:56] search_0067: answer answer='Turku' cost=41 calls=1 spent=4746
+[harness 19:30:56] search_0073: answer answer='1967' cost=47 calls=1 spent=4793
+[harness 19:30:57] search_0086: answer answer='Nikolai Novak' cost=39 calls=1 spent=4832
+[harness 19:30:59] coding_0042: answer answer='DONE' cost=124 calls=1 spent=4956
+[harness 19:30:59] coding_0094: answer answer='DONE' cost=86 calls=1 spent=5042
+[harness 19:31:01] search_0016: unanswerable answer=None cost=37 calls=1 spent=5079
+[harness 19:31:01] search_0026: answer answer='1983' cost=32 calls=1 spent=5111
+[harness 19:31:03] search_0060: answer answer='1992' cost=50 calls=1 spent=5161
+[harness 19:31:03] search_0079: unanswerable answer=None cost=30 calls=1 spent=5191
+[harness 19:31:05] math_0010: answer answer='101' cost=87 calls=1 spent=5278
+[harness 19:31:05] math_0012: answer answer='2628' cost=46 calls=1 spent=5324
+[harness 19:31:06] math_0024: answer answer='9540' cost=84 calls=1 spent=5409
+[harness 19:31:07] math_0087: answer answer='433' cost=83 calls=1 spent=5492
+[harness 19:31:07] math_0096: answer answer='1432' cost=45 calls=1 spent=5537
+[harness 19:31:08] math_0098: answer answer='24' cost=63 calls=1 spent=5601
+[harness 19:31:08] search_0006: answer answer='Cusco' cost=41 calls=1 spent=5641
+[harness 19:31:09] search_0008: answer answer='Gdansk' cost=39 calls=1 spent=5680
+[harness 19:31:10] search_0031: answer answer='1970' cost=36 calls=1 spent=5717
+[harness 19:31:11] search_0088: answer answer='1990' cost=50 calls=1 spent=5767
+[harness 19:31:11] coding_0022: answer answer='DONE' cost=54 calls=1 spent=5821
+[harness 19:31:13] coding_0058: answer answer='DONE' cost=104 calls=1 spent=5925
+[harness 19:31:13] data_analysis_0034: answer answer='43' cost=108 calls=1 spent=6033
+[harness 19:31:14] data_analysis_0099: answer answer='1402' cost=86 calls=1 spent=6119
+[harness 19:31:15] search_0013: answer answer='1986' cost=34 calls=1 spent=6152
+[harness 19:31:17] search_0032: unanswerable answer=None cost=86 calls=1 spent=6238
+[harness 19:31:17] search_0040: unanswerable answer=None cost=36 calls=1 spent=6275
+[harness 19:31:18] search_0051: answer answer='Graz' cost=42 calls=1 spent=6317
+[harness 19:31:20] search_0049: unanswerable answer=None cost=38 calls=1 spent=6355
+[harness 19:31:20] search_0053: answer answer='Lyon' cost=34 calls=1 spent=6390
+[harness 19:31:21] search_0061: answer answer='Sergei Wang' cost=36 calls=1 spent=6426
+[harness 19:31:22] coding_0045: answer answer='DONE' cost=118 calls=1 spent=6544
+[harness 19:31:22] coding_0085: answer answer='DONE' cost=94 calls=1 spent=6638
+[harness 19:31:23] search_0015: answer answer='1999' cost=46 calls=1 spent=6684
+[harness 19:31:23] search_0046: answer answer='Alice Petrov' cost=35 calls=1 spent=6719
+[harness 19:31:24] search_0072: answer answer='1995' cost=50 calls=1 spent=6768
+[harness 19:31:24] search_0047: answer answer='1969' cost=45 calls=1 spent=6813
+[harness 19:31:24] done: 85/100 answered, spent 6813 in 92 calls, 105s

@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 243, "completion": 18, "content": "Boris Kowalski -> employer Dune Robotics -> headquarters Graz\nGraz", "tool_calls": []}
+{"kind": "harness", "note": "direct search answer 'Graz'"}

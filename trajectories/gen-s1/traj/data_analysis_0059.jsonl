@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 210, "completion": 84, "content": "import csv\nr=csv.reader(open('sales.csv'))\nh=next(r)\ni={c:j for j,c in enumerate(h)}\ns=0\nfor row in r:\n    if row[i['product']]=='gadget' and 13<=int(row[i['month']])<=14:\n        s+=int(row[i['units']])\nprint(s)", "tool_calls": []}
+{"kind": "harness", "note": "compute run rc=0 answer='0' err=''"}

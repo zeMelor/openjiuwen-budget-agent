@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 185, "completion": 16, "content": "Maya Muller -> employer Iris Optics -> headquarters Lyon\nLyon", "tool_calls": []}
+{"kind": "harness", "note": "direct search answer 'Lyon'"}

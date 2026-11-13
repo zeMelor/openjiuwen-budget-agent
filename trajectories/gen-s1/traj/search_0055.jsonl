@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 209, "completion": 14, "content": "Chen Kowalski -> born\n1969", "tool_calls": []}
+{"kind": "harness", "note": "direct search answer '1969'"}

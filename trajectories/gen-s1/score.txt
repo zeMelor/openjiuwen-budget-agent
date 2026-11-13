@@ -1,0 +1,20 @@
+== gen-s1: 255/255 points, solved 80/80 feasible, tokens (proxy) 6813 in 92 calls, refused 0, errors 0
+   harness meter 6813 (proxy 6813); per feasible task 85
+
+type           variant      n solved    points    cost cost/task calls
+coding         base        12     12   38/38      1232       103    12
+coding         hard         6      6   26/26       704       117     6
+coding         infeasible   7      0    0/0          0         0     0
+data_analysis  base        14     14   42/42      1261        90    14
+data_analysis  hard         8      8   28/28       714        89     8
+data_analysis  infeasible   3      0    0/0        189        63     2
+math           base        13     13   42/42       664        51    13
+math           hard         7      7   17/17       596        85     7
+math           infeasible   5      0    0/0        402        80     5
+search         base        10     10   34/34       376        38    10
+search         hard        10     10   28/28       449        45    10
+search         infeasible   5      0    0/0        227        45     5
+
+infeasible: 20 tasks, answered 5, tokens spent on them 818
+
+budget curve: 1000->47, 2000->85, 5000->203, 10000->255, 20000->255, 50000->255, 100000->255

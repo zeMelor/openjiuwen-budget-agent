@@ -1,0 +1,100 @@
+{"task": "coding_0003", "type": "coding", "reward": 1.0, "answer": null, "result": "precheck", "reason": "test_mylib.py: m.unique([3, 1, 3, 2, 1]) expected both [3, 1] and [3, 1, 2]", "cost": 0.0, "calls": 0, "retries": 0, "sec": 0.0}
+{"task": "coding_0023", "type": "coding", "reward": 5.0, "answer": null, "result": "precheck", "reason": "test_mylib.py: m.is_palindrome('Level') must be both true and false", "cost": 0.0, "calls": 0, "retries": 0, "sec": 0.0}
+{"task": "coding_0036", "type": "coding", "reward": 5.0, "answer": null, "result": "precheck", "reason": "test_mylib.py: m.word_count('a b  c') expected both 4 and 3", "cost": 0.0, "calls": 0, "retries": 0, "sec": 0.0}
+{"task": "coding_0062", "type": "coding", "reward": 5.0, "answer": null, "result": "precheck", "reason": "test_mylib.py: m.average([2, 4, 6]) expected both 4 and 5", "cost": 0.0, "calls": 0, "retries": 0, "sec": 0.0}
+{"task": "coding_0068", "type": "coding", "reward": 3.0, "answer": null, "result": "precheck", "reason": "test_mylib.py: m.average([2, 4, 6]) expected both 5 and 4", "cost": 0.0, "calls": 0, "retries": 0, "sec": 0.0}
+{"task": "coding_0077", "type": "coding", "reward": 4.0, "answer": null, "result": "precheck", "reason": "test_mylib.py: m.unique([3, 1, 3, 2, 1]) expected both [3, 1] and [3, 1, 2]", "cost": 0.0, "calls": 0, "retries": 0, "sec": 0.0}
+{"task": "coding_0083", "type": "coding", "reward": 2.0, "answer": null, "result": "precheck", "reason": "test_mylib.py: m.factorial(5) expected both 120 and 121", "cost": 0.0, "calls": 0, "retries": 0, "sec": 0.0}
+{"task": "data_analysis_0002", "type": "data_analysis", "reward": 2.0, "answer": null, "result": "precheck", "reason": "'central' does not occur in the task files", "cost": 0.0, "calls": 0, "retries": 0, "sec": 0.0}
+{"task": "math_0011", "type": "math", "reward": 5.0, "answer": "1794", "result": "answer", "cost": 51.5, "calls": 1, "retries": 0, "sec": 1.7, "pass": 1}
+{"task": "math_0004", "type": "math", "reward": 5.0, "answer": "969", "result": "answer", "cost": 49.3, "calls": 1, "retries": 0, "sec": 1.8, "pass": 1}
+{"task": "math_0014", "type": "math", "reward": 5.0, "answer": "2655", "result": "answer", "cost": 108.7, "calls": 1, "retries": 0, "sec": 1.6, "pass": 1}
+{"task": "math_0027", "type": "math", "reward": 5.0, "answer": "7664", "result": "answer", "cost": 106.5, "calls": 1, "retries": 0, "sec": 4.2, "pass": 1}
+{"task": "math_0080", "type": "math", "reward": 5.0, "answer": "1297", "result": "answer", "cost": 106.1, "calls": 1, "retries": 0, "sec": 4.1, "pass": 1}
+{"task": "math_0089", "type": "math", "reward": 5.0, "answer": "1894", "result": "answer", "cost": 85.0, "calls": 1, "retries": 0, "sec": 1.7, "pass": 1}
+{"task": "math_0095", "type": "math", "reward": 5.0, "answer": "1681", "result": "answer", "cost": 46.4, "calls": 1, "retries": 0, "sec": 1.6, "pass": 1}
+{"task": "math_0005", "type": "math", "reward": 4.0, "answer": "2514", "result": "answer", "cost": 46.4, "calls": 1, "retries": 0, "sec": 1.0, "pass": 1}
+{"task": "math_0052", "type": "math", "reward": 4.0, "answer": "16056", "result": "answer", "cost": 48.5, "calls": 1, "retries": 0, "sec": 1.3, "pass": 1}
+{"task": "math_0075", "type": "math", "reward": 4.0, "answer": "370", "result": "answer", "cost": 62.0, "calls": 1, "retries": 0, "sec": 1.3, "pass": 1}
+{"task": "data_analysis_0001", "type": "data_analysis", "reward": 5.0, "answer": "0", "result": "answer", "cost": 111.9, "calls": 1, "retries": 0, "sec": 2.4, "pass": 1}
+{"task": "data_analysis_0007", "type": "data_analysis", "reward": 5.0, "answer": "0", "result": "answer", "cost": 88.1, "calls": 1, "retries": 0, "sec": 1.3, "pass": 1}
+{"task": "data_analysis_0059", "type": "data_analysis", "reward": 5.0, "answer": "0", "result": "answer", "cost": 105.0, "calls": 1, "retries": 0, "sec": 1.3, "pass": 1}
+{"task": "data_analysis_0063", "type": "data_analysis", "reward": 5.0, "answer": "32", "result": "answer", "cost": 98.8, "calls": 1, "retries": 0, "sec": 1.4, "pass": 1}
+{"task": "data_analysis_0082", "type": "data_analysis", "reward": 5.0, "answer": "34", "result": "answer", "cost": 72.7, "calls": 1, "retries": 0, "sec": 1.2, "pass": 1}
+{"task": "data_analysis_0033", "type": "data_analysis", "reward": 4.0, "answer": "20754", "result": "answer", "cost": 89.7, "calls": 1, "retries": 0, "sec": 2.0, "pass": 1}
+{"task": "math_0021", "type": "math", "reward": 5.0, "answer": "314", "result": "answer", "cost": 62.0, "calls": 1, "retries": 0, "sec": 27.3, "pass": 1}
+{"task": "data_analysis_0043", "type": "data_analysis", "reward": 4.0, "answer": "51", "result": "answer", "cost": 83.4, "calls": 1, "retries": 0, "sec": 1.2, "pass": 1}
+{"task": "data_analysis_0050", "type": "data_analysis", "reward": 4.0, "answer": "139", "result": "answer", "cost": 77.9, "calls": 1, "retries": 0, "sec": 1.5, "pass": 1}
+{"task": "data_analysis_0069", "type": "data_analysis", "reward": 4.0, "answer": "88", "result": "answer", "cost": 83.8, "calls": 1, "retries": 0, "sec": 1.3, "pass": 1}
+{"task": "data_analysis_0078", "type": "data_analysis", "reward": 4.0, "answer": "20", "result": "answer", "cost": 80.9, "calls": 1, "retries": 0, "sec": 1.5, "pass": 1}
+{"task": "data_analysis_0076", "type": "data_analysis", "reward": 4.0, "answer": "0", "result": "answer", "cost": 98.6, "calls": 1, "retries": 0, "sec": 2.0, "pass": 1}
+{"task": "math_0020", "type": "math", "reward": 3.0, "answer": "541", "result": "answer", "cost": 79.1, "calls": 1, "retries": 0, "sec": 2.1, "pass": 1}
+{"task": "math_0041", "type": "math", "reward": 3.0, "answer": "616", "result": "answer", "cost": 45.4, "calls": 1, "retries": 0, "sec": 1.7, "pass": 1}
+{"task": "math_0091", "type": "math", "reward": 3.0, "answer": null, "result": "unanswerable", "cost": 73.9, "calls": 1, "retries": 0, "sec": 2.2, "pass": 1}
+{"task": "data_analysis_0009", "type": "data_analysis", "reward": 3.0, "answer": "193", "result": "answer", "cost": 102.8, "calls": 1, "retries": 0, "sec": 3.5, "pass": 1}
+{"task": "data_analysis_0025", "type": "data_analysis", "reward": 3.0, "answer": "396", "result": "answer", "cost": 79.9, "calls": 1, "retries": 0, "sec": 1.7, "pass": 1}
+{"task": "data_analysis_0074", "type": "data_analysis", "reward": 3.0, "answer": "21927", "result": "answer", "cost": 88.1, "calls": 1, "retries": 0, "sec": 1.5, "pass": 1}
+{"task": "data_analysis_0037", "type": "data_analysis", "reward": 3.0, "answer": "13", "result": "answer", "cost": 103.7, "calls": 1, "retries": 0, "sec": 2.2, "pass": 1}
+{"task": "data_analysis_0092", "type": "data_analysis", "reward": 3.0, "answer": "36", "result": "answer", "cost": 79.4, "calls": 1, "retries": 0, "sec": 1.2, "pass": 1}
+{"task": "data_analysis_0097", "type": "data_analysis", "reward": 3.0, "answer": "296", "result": "answer", "cost": 79.7, "calls": 1, "retries": 0, "sec": 1.6, "pass": 1}
+{"task": "math_0017", "type": "math", "reward": 2.0, "answer": "2816", "result": "answer", "cost": 47.5, "calls": 1, "retries": 0, "sec": 0.9, "pass": 1}
+{"task": "math_0064", "type": "math", "reward": 2.0, "answer": "1272", "result": "answer", "cost": 50.1, "calls": 1, "retries": 0, "sec": 0.9, "pass": 1}
+{"task": "math_0018", "type": "math", "reward": 2.0, "answer": "679", "result": "answer", "cost": 80.5, "calls": 1, "retries": 0, "sec": 2.3, "pass": 1}
+{"task": "math_0065", "type": "math", "reward": 2.0, "answer": "1540", "result": "answer", "cost": 69.9, "calls": 1, "retries": 0, "sec": 1.2, "pass": 1}
+{"task": "math_0081", "type": "math", "reward": 2.0, "answer": null, "result": "unanswerable", "cost": 33.7, "calls": 1, "retries": 0, "sec": 0.8, "pass": 1}
+{"task": "coding_0029", "type": "coding", "reward": 5.0, "answer": "DONE", "result": "answer", "cost": 94.7, "calls": 1, "retries": 0, "sec": 1.7, "pass": 1}
+{"task": "coding_0028", "type": "coding", "reward": 5.0, "answer": "DONE", "result": "answer", "cost": 141.9, "calls": 1, "retries": 0, "sec": 2.5, "pass": 1}
+{"task": "coding_0057", "type": "coding", "reward": 5.0, "answer": "DONE", "result": "answer", "cost": 91.7, "calls": 1, "retries": 0, "sec": 1.5, "pass": 1}
+{"task": "coding_0038", "type": "coding", "reward": 5.0, "answer": "DONE", "result": "answer", "cost": 124.7, "calls": 1, "retries": 0, "sec": 1.8, "pass": 1}
+{"task": "coding_0035", "type": "coding", "reward": 4.0, "answer": "DONE", "result": "answer", "cost": 132.3, "calls": 1, "retries": 0, "sec": 1.9, "pass": 1}
+{"task": "coding_0030", "type": "coding", "reward": 4.0, "answer": "DONE", "result": "answer", "cost": 122.0, "calls": 1, "retries": 0, "sec": 3.0, "pass": 1}
+{"task": "coding_0039", "type": "coding", "reward": 4.0, "answer": "DONE", "result": "answer", "cost": 96.5, "calls": 1, "retries": 0, "sec": 1.6, "pass": 1}
+{"task": "coding_0044", "type": "coding", "reward": 4.0, "answer": "DONE", "result": "answer", "cost": 107.8, "calls": 1, "retries": 0, "sec": 1.4, "pass": 1}
+{"task": "coding_0048", "type": "coding", "reward": 4.0, "answer": "DONE", "result": "answer", "cost": 108.2, "calls": 1, "retries": 0, "sec": 1.2, "pass": 1}
+{"task": "coding_0056", "type": "coding", "reward": 4.0, "answer": "DONE", "result": "answer", "cost": 136.3, "calls": 1, "retries": 0, "sec": 1.5, "pass": 1}
+{"task": "coding_0090", "type": "coding", "reward": 4.0, "answer": "DONE", "result": "answer", "cost": 90.7, "calls": 1, "retries": 0, "sec": 2.3, "pass": 1}
+{"task": "coding_0093", "type": "coding", "reward": 4.0, "answer": "DONE", "result": "answer", "cost": 107.9, "calls": 1, "retries": 0, "sec": 1.5, "pass": 1}
+{"task": "data_analysis_0000", "type": "data_analysis", "reward": 2.0, "answer": "24", "result": "answer", "cost": 79.8, "calls": 1, "retries": 0, "sec": 2.0, "pass": 1}
+{"task": "data_analysis_0019", "type": "data_analysis", "reward": 2.0, "answer": "16537", "result": "answer", "cost": 95.8, "calls": 1, "retries": 0, "sec": 2.1, "pass": 1}
+{"task": "data_analysis_0070", "type": "data_analysis", "reward": 2.0, "answer": "47", "result": "answer", "cost": 82.9, "calls": 1, "retries": 0, "sec": 1.2, "pass": 1}
+{"task": "data_analysis_0071", "type": "data_analysis", "reward": 2.0, "answer": "1118", "result": "answer", "cost": 89.0, "calls": 1, "retries": 0, "sec": 2.2, "pass": 1}
+{"task": "data_analysis_0084", "type": "data_analysis", "reward": 2.0, "answer": "155", "result": "answer", "cost": 97.8, "calls": 1, "retries": 0, "sec": 2.0, "pass": 1}
+{"task": "search_0054", "type": "search", "reward": 5.0, "answer": "Lisbon", "result": "answer", "cost": 41.2, "calls": 1, "retries": 0, "sec": 1.1, "pass": 1}
+{"task": "search_0055", "type": "search", "reward": 5.0, "answer": "1969", "result": "answer", "cost": 34.9, "calls": 1, "retries": 0, "sec": 1.2, "pass": 1}
+{"task": "search_0066", "type": "search", "reward": 5.0, "answer": "Graz", "result": "answer", "cost": 52.3, "calls": 1, "retries": 0, "sec": 1.2, "pass": 1}
+{"task": "search_0067", "type": "search", "reward": 5.0, "answer": "Turku", "result": "answer", "cost": 41.2, "calls": 1, "retries": 0, "sec": 1.1, "pass": 1}
+{"task": "search_0073", "type": "search", "reward": 5.0, "answer": "1967", "result": "answer", "cost": 47.0, "calls": 1, "retries": 0, "sec": 1.2, "pass": 1}
+{"task": "search_0086", "type": "search", "reward": 5.0, "answer": "Nikolai Novak", "result": "answer", "cost": 38.9, "calls": 1, "retries": 0, "sec": 1.1, "pass": 1}
+{"task": "coding_0042", "type": "coding", "reward": 3.0, "answer": "DONE", "result": "answer", "cost": 124.1, "calls": 1, "retries": 0, "sec": 2.9, "pass": 1}
+{"task": "coding_0094", "type": "coding", "reward": 3.0, "answer": "DONE", "result": "answer", "cost": 85.9, "calls": 1, "retries": 0, "sec": 2.7, "pass": 1}
+{"task": "search_0016", "type": "search", "reward": 4.0, "answer": null, "result": "unanswerable", "cost": 36.6, "calls": 1, "retries": 0, "sec": 2.1, "pass": 1}
+{"task": "search_0026", "type": "search", "reward": 4.0, "answer": "1983", "result": "answer", "cost": 32.2, "calls": 1, "retries": 0, "sec": 2.1, "pass": 1}
+{"task": "search_0060", "type": "search", "reward": 4.0, "answer": "1992", "result": "answer", "cost": 49.7, "calls": 1, "retries": 0, "sec": 2.3, "pass": 1}
+{"task": "search_0079", "type": "search", "reward": 4.0, "answer": null, "result": "unanswerable", "cost": 29.8, "calls": 1, "retries": 0, "sec": 2.0, "pass": 1}
+{"task": "math_0010", "type": "math", "reward": 1.0, "answer": "101", "result": "answer", "cost": 87.3, "calls": 1, "retries": 0, "sec": 1.5, "pass": 1}
+{"task": "math_0012", "type": "math", "reward": 1.0, "answer": "2628", "result": "answer", "cost": 46.4, "calls": 1, "retries": 0, "sec": 1.9, "pass": 1}
+{"task": "math_0024", "type": "math", "reward": 1.0, "answer": "9540", "result": "answer", "cost": 84.2, "calls": 1, "retries": 0, "sec": 1.6, "pass": 1}
+{"task": "math_0087", "type": "math", "reward": 1.0, "answer": "433", "result": "answer", "cost": 83.2, "calls": 1, "retries": 0, "sec": 1.5, "pass": 1}
+{"task": "math_0096", "type": "math", "reward": 1.0, "answer": "1432", "result": "answer", "cost": 45.4, "calls": 1, "retries": 0, "sec": 1.0, "pass": 1}
+{"task": "math_0098", "type": "math", "reward": 1.0, "answer": "24", "result": "answer", "cost": 63.4, "calls": 1, "retries": 0, "sec": 1.0, "pass": 1}
+{"task": "search_0006", "type": "search", "reward": 3.0, "answer": "Cusco", "result": "answer", "cost": 40.7, "calls": 1, "retries": 0, "sec": 1.0, "pass": 1}
+{"task": "search_0008", "type": "search", "reward": 3.0, "answer": "Gdansk", "result": "answer", "cost": 39.2, "calls": 1, "retries": 0, "sec": 1.4, "pass": 1}
+{"task": "search_0031", "type": "search", "reward": 3.0, "answer": "1970", "result": "answer", "cost": 36.5, "calls": 1, "retries": 0, "sec": 1.1, "pass": 1}
+{"task": "search_0088", "type": "search", "reward": 3.0, "answer": "1990", "result": "answer", "cost": 50.0, "calls": 1, "retries": 0, "sec": 1.4, "pass": 1}
+{"task": "coding_0022", "type": "coding", "reward": 2.0, "answer": "DONE", "result": "answer", "cost": 54.3, "calls": 1, "retries": 0, "sec": 1.2, "pass": 1}
+{"task": "coding_0058", "type": "coding", "reward": 2.0, "answer": "DONE", "result": "answer", "cost": 103.9, "calls": 1, "retries": 0, "sec": 2.1, "pass": 1}
+{"task": "data_analysis_0034", "type": "data_analysis", "reward": 1.0, "answer": "43", "result": "answer", "cost": 107.8, "calls": 1, "retries": 0, "sec": 2.2, "pass": 1}
+{"task": "data_analysis_0099", "type": "data_analysis", "reward": 1.0, "answer": "1402", "result": "answer", "cost": 86.0, "calls": 1, "retries": 0, "sec": 1.5, "pass": 1}
+{"task": "search_0013", "type": "search", "reward": 2.0, "answer": "1986", "result": "answer", "cost": 33.5, "calls": 1, "retries": 0, "sec": 1.7, "pass": 1}
+{"task": "search_0032", "type": "search", "reward": 2.0, "answer": null, "result": "unanswerable", "cost": 85.7, "calls": 1, "retries": 0, "sec": 2.3, "pass": 1}
+{"task": "search_0040", "type": "search", "reward": 2.0, "answer": null, "result": "unanswerable", "cost": 36.5, "calls": 1, "retries": 0, "sec": 2.1, "pass": 1}
+{"task": "search_0051", "type": "search", "reward": 2.0, "answer": "Graz", "result": "answer", "cost": 42.3, "calls": 1, "retries": 0, "sec": 1.2, "pass": 1}
+{"task": "search_0049", "type": "search", "reward": 2.0, "answer": null, "result": "unanswerable", "cost": 38.3, "calls": 1, "retries": 0, "sec": 3.4, "pass": 1}
+{"task": "search_0053", "type": "search", "reward": 2.0, "answer": "Lyon", "result": "answer", "cost": 34.5, "calls": 1, "retries": 0, "sec": 2.1, "pass": 1}
+{"task": "search_0061", "type": "search", "reward": 2.0, "answer": "Sergei Wang", "result": "answer", "cost": 35.8, "calls": 1, "retries": 0, "sec": 1.0, "pass": 1}
+{"task": "coding_0045", "type": "coding", "reward": 1.0, "answer": "DONE", "result": "answer", "cost": 118.1, "calls": 1, "retries": 0, "sec": 1.4, "pass": 1}
+{"task": "coding_0085", "type": "coding", "reward": 1.0, "answer": "DONE", "result": "answer", "cost": 94.2, "calls": 1, "retries": 0, "sec": 1.3, "pass": 1}
+{"task": "search_0015", "type": "search", "reward": 1.0, "answer": "1999", "result": "answer", "cost": 46.2, "calls": 1, "retries": 0, "sec": 1.5, "pass": 1}
+{"task": "search_0046", "type": "search", "reward": 1.0, "answer": "Alice Petrov", "result": "answer", "cost": 34.8, "calls": 1, "retries": 0, "sec": 1.1, "pass": 1}
+{"task": "search_0072", "type": "search", "reward": 1.0, "answer": "1995", "result": "answer", "cost": 49.5, "calls": 1, "retries": 0, "sec": 1.0, "pass": 1}
+{"task": "search_0047", "type": "search", "reward": 1.0, "answer": "1969", "result": "answer", "cost": 44.8, "calls": 1, "retries": 0, "sec": 1.4, "pass": 1}

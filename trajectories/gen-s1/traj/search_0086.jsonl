@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 209, "completion": 18, "content": "Jonas Petrov -> mentor Nikolai Novak\nNikolai Novak", "tool_calls": []}
+{"kind": "harness", "note": "direct search answer 'Nikolai Novak'"}

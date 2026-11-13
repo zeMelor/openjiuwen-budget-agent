@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 178, "completion": 12, "content": "Hiro Muller -> employer -> UNANSWERABLE", "tool_calls": []}
+{"kind": "harness", "note": "direct search answer 'UNANSWERABLE'"}

@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 211, "completion": 67, "content": "import csv\nr=0\nwith open('sales.csv') as f:\n    for row in csv.DictReader(f):\n        if row['product']=='gizmo' and row['region']=='west' and int(row['month'])==9:\n            r+=int(row['units'])\nprint(r)", "tool_calls": []}
+{"kind": "harness", "note": "compute run rc=0 answer='0' err=''"}

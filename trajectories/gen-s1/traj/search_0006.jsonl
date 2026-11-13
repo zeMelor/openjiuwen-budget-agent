@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 247, "completion": 16, "content": "Chen Muller -> employer Ember Bio -> headquarters Cusco\nCusco", "tool_calls": []}
+{"kind": "harness", "note": "direct search answer 'Cusco'"}

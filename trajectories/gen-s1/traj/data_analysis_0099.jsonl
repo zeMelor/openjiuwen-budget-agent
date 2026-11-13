@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 210, "completion": 65, "content": "import csv\nr=csv.reader(open('sales.csv'))\nh=next(r)\nt=0\nfor row in r:\n    if row[2]=='gizmo' and 2<=int(row[3])<=5:\n        t+=int(row[4])\nprint(t)", "tool_calls": []}
+{"kind": "harness", "note": "compute run rc=0 answer='1402' err=''"}

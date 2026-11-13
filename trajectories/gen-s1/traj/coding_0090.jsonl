@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 367, "completion": 54, "content": "```python\ndef average(xs):\n    return sum(xs) / len(xs)\n\ndef factorial(n):\n    r = 1\n    for i in range(2, n + 1):\n        r *= i\n    return r\n```", "tool_calls": []}
+{"kind": "harness", "note": "fast round 0 (qwen3.8-27b-noreason): failures (2, 0) -> (0, 0), whole change of ['mylib.py']"}

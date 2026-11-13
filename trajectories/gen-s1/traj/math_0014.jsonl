@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 297, "completion": 79, "content": "s = 1881\ns -= s * 40 // 100\ns -= 24\ns -= 27 * 4\ns *= 2\ns += 2 * 116\ns *= 2\ns -= 28\ns -= s * 40 // 100\nprint(s)", "tool_calls": []}
+{"kind": "harness", "note": "compute run rc=0 answer='2655' err=''"}

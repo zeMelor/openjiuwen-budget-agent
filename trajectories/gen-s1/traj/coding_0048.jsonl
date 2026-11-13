@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 432, "completion": 65, "content": "```python\ndef total(xs):\n    s = 0\n    for x in xs:\n        s += x\n    return s\n\n\ndef first_n(xs, n):\n    return xs[:n]\n\n\ndef reverse_words(s):\n    return ' '.join(s.split()[::-1])\n```", "tool_calls": []}
+{"kind": "harness", "note": "fast round 0 (qwen3.8-27b-noreason): failures (3, 0) -> (0, 0), whole change of ['mylib.py']"}

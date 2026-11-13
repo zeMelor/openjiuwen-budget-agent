@@ -1,0 +1,31 @@
+# секреты: ключ прокси передаётся только через окружение
+.env
+.env.*
+!.env.example
+*.key
+secrets/
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# результаты прогонов
+answer.txt
+runs/
+logs/
+bench/sets/
+bench/holdout-c1/refs/
+out/
+*.log
+
+# ОС
+.DS_Store
+Thumbs.db
+bench/coding-x1/refs/
+bench/coding-x1/refs_visible/
+
+# траектории к сдаче хранятся целиком, вместе с *.log
+!/trajectories/**

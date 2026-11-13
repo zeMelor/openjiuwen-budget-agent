@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 252, "completion": 21, "content": "Sergei Smith -> mentor Rosa Garcia -> born 1999\n1999", "tool_calls": []}
+{"kind": "harness", "note": "direct search answer '1999'"}

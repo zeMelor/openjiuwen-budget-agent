@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 215, "completion": 12, "content": "Boris Novak -> Born\n1986", "tool_calls": []}
+{"kind": "harness", "note": "direct search answer '1986'"}

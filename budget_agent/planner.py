@@ -1,0 +1,69 @@
+"""Выбор и порядок задач.
+
+Оценка стоимости по типу задачи, сортировка по reward / оценка. Порядок и пропуск задач важны, только когда бюджет
+кончается раньше задач: организаторы обсуждали «больше задач или меньше бюджет» (docs/chat-answers.md, 10.11).
+"""
+from __future__ import annotations
+
+from .tasks import Task
+
+# Средняя стоимость первого прохода (output + input/10) на hold-c3..c6 и регрессе (v8.3–v9.4, 10.11), включая
+# невыполнимые. Оценки с 9 ноября (search 550, coding 400, data 200, math 150) остались от агентного search: самые
+# дешёвые сейчас задачи шли в конец очереди и пропускались при остатке меньше 550. Симуляция тесного бюджета по
+# логам пяти наборов: при 30–50 % нужного бюджета +53…+80 баллов из ~479, при полном не хуже.
+DEFAULT_COST = {
+    "math": 85.0,
+    "data_analysis": 140.0,
+    "search": 105.0,
+    "coding": 270.0,
+}
+UNKNOWN_COST = 600.0
+# Потолок расхода на одну задачу: безнадёжная задача не съедает бюджет. Отдельно от оценки: потолки подобраны
+# под трудные задачи (повторы coding, длинные карточки search) и с оценкой не обязаны меняться.
+# math и data подняты 12.11 вместе с потолком ответа (500 и 600 токенов): два обрезанных ответа по 300 съедали
+# потолок 600, и задача оставалась без ответа (hold-c7, разбор лога).
+TASK_CAP = {
+    "math": 800.0,
+    "data_analysis": 1000.0,
+    "search": 1650.0,
+    "coding": 1200.0,
+}
+UNKNOWN_CAP = 1800.0
+# Второй проход (модель с рассуждениями для застрявшего coding): потолок на задачу и сколько бюджета
+# должно остаться нетронутым. Баллы важнее токенов, но отборочный этап с малым бюджетом трогать нельзя.
+ESCALATE_TASK_CAP = 8000.0
+ESCALATE_MIN_LEFT = 10000.0
+ESCALATE_MIN_FRACTION = 0.3
+
+
+# Тесный бюджет (BUDGET может быть меньше 100k): потолок на задачу сжимается пропорционально. На регрессе
+# при 8 000 одна задача search съела 2 182 (вызов 690, обрезан; повтор 1 493, снова обрезан) — четверть бюджета за
+# ноль, а это 10–15 задач подешевле. Режим включается, только если бюджет меньше TIGHT_RATIO оценок первого прохода;
+# при 100k и сотне задач (оценка ~15 000) потолки прежние.
+TIGHT_RATIO = 2.0
+TIGHT_MIN_EST = 3.0  # не ниже трёх средних стоимостей задачи этого типа
+_cap_scale = 1.0
+
+
+def estimate_cost(task: Task) -> float:
+    return DEFAULT_COST.get(task.task_type, UNKNOWN_COST)
+
+
+def set_budget_pressure(budget: float, tasks: list[Task]) -> float:
+    """Запомнить, насколько тесен бюджет; вернуть отношение бюджета к оценке первого прохода."""
+    global _cap_scale
+    need = sum(estimate_cost(t) for t in tasks)
+    ratio = budget / need if need > 0 else float("inf")
+    _cap_scale = 1.0 if ratio >= TIGHT_RATIO else max(ratio / TIGHT_RATIO, 0.0)
+    return ratio
+
+
+def task_cap(task: Task) -> float:
+    base = TASK_CAP.get(task.task_type, UNKNOWN_CAP)
+    if _cap_scale >= 1.0:
+        return base
+    return min(base, max(TIGHT_MIN_EST * estimate_cost(task), base * _cap_scale))
+
+
+def order_tasks(tasks: list[Task]) -> list[Task]:
+    return sorted(tasks, key=lambda t: t.reward / max(estimate_cost(t), 1.0), reverse=True)

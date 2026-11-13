@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 423, "completion": 90, "content": "```python\ndef average(xs):\n    return sum(xs) / len(xs)\n\n\ndef unique(xs):\n    seen = set()\n    result = []\n    for x in xs:\n        if x not in seen:\n            seen.add(x)\n            result.append(x)\n    return result\n\n\ndef is_palindrome(s):\n    t = s.lower()\n    return t == t[::-1]\n```", "tool_calls": []}
+{"kind": "harness", "note": "fast round 0 (qwen3.8-27b-noreason): failures (3, 0) -> (0, 0), whole change of ['mylib.py']"}

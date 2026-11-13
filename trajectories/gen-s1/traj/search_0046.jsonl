@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 188, "completion": 16, "content": "Nikolai Muller -> mentor Alice Petrov\nAlice Petrov", "tool_calls": []}
+{"kind": "harness", "note": "direct search answer 'Alice Petrov'"}

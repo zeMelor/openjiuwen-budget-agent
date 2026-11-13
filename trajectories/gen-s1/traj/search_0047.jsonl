@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 248, "completion": 20, "content": "Hiro Wang -> mentor Pavel Smith -> born 1969\n1969", "tool_calls": []}
+{"kind": "harness", "note": "direct search answer '1969'"}

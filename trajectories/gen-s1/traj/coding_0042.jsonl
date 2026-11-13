@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 411, "completion": 83, "content": "```python\ndef total(xs):\n    s = 0\n    for x in xs:\n        s += x\n    return s\n\n\ndef average(xs):\n    return sum(xs) / len(xs)\n\n\ndef maximum(xs):\n    best = xs[0]\n    for x in xs:\n        if x > best:\n            best = x\n    return best\n```", "tool_calls": []}
+{"kind": "harness", "note": "fast round 0 (qwen3.8-27b-noreason): failures (3, 0) -> (0, 0), whole change of ['mylib.py']"}

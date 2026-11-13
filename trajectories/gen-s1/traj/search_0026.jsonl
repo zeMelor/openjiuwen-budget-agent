@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 182, "completion": 14, "content": "Nikolai Sato -> born\n1983", "tool_calls": []}
+{"kind": "harness", "note": "direct search answer '1983'"}

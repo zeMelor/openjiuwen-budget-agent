@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 303, "completion": 22, "content": "Boris Ivanova -> mentor Kira Novak -> employer Juniper Foods -> headquarters Graz\nGraz", "tool_calls": []}
+{"kind": "harness", "note": "direct search answer 'Graz'"}

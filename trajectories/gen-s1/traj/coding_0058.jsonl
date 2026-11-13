@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 379, "completion": 66, "content": "```python\ndef maximum(xs):\n    best = xs[0]\n    for x in xs:\n        if x > best:\n            best = x\n    return best\n\n\ndef count_even(xs):\n    return sum(1 for x in xs if x % 2 == 0)\n```", "tool_calls": []}
+{"kind": "harness", "note": "fast round 0 (qwen3.8-27b-noreason): failures (2, 0) -> (0, 0), whole change of ['mylib.py']"}

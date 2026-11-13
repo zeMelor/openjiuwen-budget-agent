@@ -1,0 +1,2 @@
+{"kind": "model", "model": "qwen3.8-27b-noreason", "prompt": 183, "completion": 20, "content": "Jonas Petrov -> mentor Kira Haddad -> birth year\nUNANSWERABLE", "tool_calls": []}
+{"kind": "harness", "note": "direct search answer 'UNANSWERABLE'"}
