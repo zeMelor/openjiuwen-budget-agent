@@ -1,4 +1,4 @@
-"""Второй проход: перепроверка ответов с сигналом сомнения, только из излишка бюджета (docs/ideas.md).
+"""Второй проход: перепроверка ответов с сигналом сомнения, только из излишка бюджета.
 
 Первый проход решает все задачи дёшево. Здесь берём задачи, где ответ под сомнением (сигналы считаются без
 токенов, `Attempt.flags`), и тратим на них часть оставшегося бюджета, самые выгодные первыми.
@@ -13,7 +13,7 @@
 срабатывали только на неверных ответах (17 из 17), обратный поиск и сравнения ошибались в 43 % случаев, а
 каждый третий отказ «невозможно ответить» при найденных карточках был выполнимой задачей. math и data
 перепроверяются при сигналах сомнения или отказе. Перепроверку готового ответа без сигнала можно включить
-через COMPUTE_PLAIN_VERIFY=1; сравнение режимов — docs/final-sprint.md.
+через COMPUTE_PLAIN_VERIFY=1.
 
 Задачи без ответа (UNANSWERED_RETRY, ниже): search, math и data с обрывом по длине или потолком на задачу
 получают одну попытку моделью с рассуждениями; задача любого типа после исключения или таймаута первого
@@ -54,7 +54,7 @@ P_AUDIT = 0.1
 P_COMPUTE_FLAG, P_COMPUTE_PLAIN, P_COMPUTE_NONE = 0.1, 0.04, 0.1
 # Задачи search, math и data, отсечённые проверкой «невыполнимо» без LLM (precheck.py): по всем прогонам до 11.11
 # (без hold-c2) 2 из 13 таких отсечений были выполнимыми задачами (hold-c5 search_0032, hold-c6 data_0039) — каждое
-# правило ломалось на новой формулировке, а финальные формулировки будут другими (ответ организаторов 10.11).
+# правило ломалось на новой формулировке, а финальные формулировки будут другими.
 # coding не перепроверяем: там 1 ошибка из 17 и перепроверка дорогая.
 P_PRECHECK = 0.15
 PRECHECK_TYPES = ("search", "math", "data_analysis")
@@ -66,7 +66,7 @@ PRECHECK_TYPES = ("search", "math", "data_analysis")
 P_UNANSWERED = 0.3
 UNANSWERED_TYPES = ("search", "math", "data_analysis")
 # «error» — агент с sh исчерпал шаги (ReActAgent): на невыполнимых search так кончается почти всегда, и повтор тем
-# же путём 13.11 дал 0 из 8 (jul-os, KozlovKV, стресс-набор) за ~250 токенов каждый.
+# же путём 13.11 дал 0 из 8 (сторонние наборы и стресс-набор) за ~250 токенов каждый.
 UNANSWERED_SKIP = ("unanswerable", "precheck", "escalated_impossible", "error")
 UNANSWERED_RETRY = os.environ.get("UNANSWERED_RETRY", "1") == "1"
 UNANSWERED_MAX_TOKENS = 2500
@@ -94,7 +94,7 @@ CODING_AUDIT = os.environ.get("CODING_AUDIT", "1") == "1"
 # Подозрительные ответы и отказы остаются в очереди. Прежний режим — COMPUTE_PLAIN_VERIFY=1.
 COMPUTE_PLAIN_VERIFY = os.environ.get("COMPUTE_PLAIN_VERIFY", "0") == "1"
 # Порог награды для перепроверки math и data без сигнала — середина диапазона наград набора: на наших наборах
-# (награды 1–5) это 3, как было; диапазон финальных наград организаторы не назвали («больше нуля», 10.11), и
+# (награды 1–5) это 3, как было; диапазон финальных наград заранее неизвестен, и
 # число 3 на шкале 0–1 выключило бы перепроверку, а на 10–100 включило бы её везде. COMPUTE_MIN_REWARD задаёт
 # порог числом.
 COMPUTE_REWARD_FRACTION = 0.5
@@ -128,7 +128,7 @@ class Candidate:
 
 
 # Агент с grep на отказах search: на hold-c4 и hold-c5 6 из 6 отказов оказались правда невыполнимыми, ~2 000
-# токенов без баллов (bench/RESULTS.md, v9). Выключено, включается SEARCH_AGENT_RECHECK=1.
+# токенов без баллов (v9). Выключено, включается SEARCH_AGENT_RECHECK=1.
 SEARCH_AGENT_RECHECK = os.environ.get("SEARCH_AGENT_RECHECK", "0") == "1"
 
 
@@ -222,7 +222,7 @@ async def _vote(first: str | None, alt_fn, tie_fn) -> tuple[str | None, str, int
 
 async def _precheck_verify(task: Task, budget: Budget, model: str, cap: float, traj) -> tuple[str | None, str, int]:
     """Обычный первый проход для задачи, которую проверка без LLM сочла невыполнимой. Ответ берём, только если он
-    опирается на данные задачи: модели на невыполнимых почти всегда что-то отвечают (docs/notes.md).
+    опирается на данные задачи: модели на невыполнимых почти всегда что-то отвечают.
     - search: без карточек по вопросу вызова нет вовсе; ответ-слово должно быть в карточках, тип — подходить;
     - math и data: код запущен на файлах задачи, ответ не 0 и не пустой (фильтр по отсутствующему значению даёт 0),
       тип подходит."""
@@ -241,7 +241,7 @@ async def _precheck_verify(task: Task, budget: Budget, model: str, cap: float, t
     if bad & set(att.flags):
         return None, "rejected_" + "_".join(sorted(bad & set(att.flags))), calls
     if task.task_type == "search" and _echoes_question(att.answer, task.instruction):
-        # «Who is the mentor of Zara Quinn?» -> «mentor»: человека нет, модель повторила слово вопроса (chillcoders).
+        # «Who is the mentor of Zara Quinn?» -> «mentor»: человека нет, модель повторила слово вопроса (сторонний набор).
         return None, "rejected_echo", calls
     return att.answer, "changed", calls
 

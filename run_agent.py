@@ -27,8 +27,8 @@ def load_dotenv(path: Path) -> None:
 
 
 def env_budget(default: float = 100_000.0) -> float:
-    """Бюджет из окружения: TOKEN_BUDGET (наше имя) или BUDGET (так бюджет передают организаторы).
-    Кривое значение не должно ронять прогон: тогда 100k, ориентир из ответа организаторов."""
+    """Бюджет из окружения: TOKEN_BUDGET (наше имя) или BUDGET (так бюджет передают при проверке).
+    Кривое значение не должно ронять прогон: тогда 100k."""
     for name in ("TOKEN_BUDGET", "BUDGET"):
         raw = os.environ.get(name, "").strip().replace("_", "").replace(" ", "")
         if not raw:
@@ -102,7 +102,7 @@ async def main_async(args: argparse.Namespace) -> None:
     setup_openjiuwen_logging()
 
     from budget_agent.budget import Budget
-    from budget_agent.planner import TIGHT_RATIO, estimate_cost, order_tasks, set_budget_pressure, task_cap
+    from budget_agent.planner import TIGHT_ON, estimate_cost, order_tasks, set_budget_pressure, task_cap
     from budget_agent.precheck import doubt_reason, infeasible_reason
     from budget_agent.solver import Attempt, solve
     from budget_agent.planner import ESCALATE_MIN_FRACTION, ESCALATE_MIN_LEFT
@@ -221,7 +221,7 @@ async def main_async(args: argparse.Namespace) -> None:
     queue = [t for t in order_tasks(tasks) if t.task_id not in skipped]
     queue = [t for t in queue if t.task_id not in doubted] + [t for t in queue if t.task_id in doubted]
     ratio = set_budget_pressure(args.budget, queue)
-    if ratio < TIGHT_RATIO:
+    if ratio < TIGHT_ON:
         log(f"tight budget: {args.budget:.0f} is {ratio:.2f} of the first-pass estimate, task caps scaled down")
     await asyncio.gather(*(safe_worker(t) for t in queue))
     log(f"first pass: {len(solutions)}/{len(tasks)} answered, spent {budget.spent:.0f} in {budget.calls} calls, "

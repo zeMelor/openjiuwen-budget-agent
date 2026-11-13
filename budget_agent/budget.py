@@ -1,6 +1,6 @@
 """Учёт токенов по правилам регламента: cost = completion + prompt / 10.
 
-Токены рассуждений прокси уже включает в completion_tokens (проверено в docs/proxy.md),
+Токены рассуждений прокси уже включает в completion_tokens (проверено замером на прокси),
 кеш не учитывается.
 """
 from __future__ import annotations

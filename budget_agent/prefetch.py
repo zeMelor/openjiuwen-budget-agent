@@ -51,7 +51,7 @@ def prefetch_files(task: Task, max_files: int = 4, head: int = 2) -> str | None:
     Файлов больше max_files (помесячные csv, логи по дням): список файлов и заголовки по одному файлу каждого типа —
     раньше в этом случае модель не видела ничего. Двоичные файлы (SQLite, gzip, xlsx) описываются по структуре."""
     root = task.workdir
-    # Без workspace/ файлы лежат прямо в каталоге задачи (chillcoders): раньше тогда не показывалось ничего, и модель
+    # Без workspace/ файлы лежат прямо в каталоге задачи (сторонний набор): раньше тогда не показывалось ничего, и модель
     # угадывала колонки (product и date вместо category и quarter, data_easy_0003).
     files = [p for p in sorted(root.rglob("*")) if p.is_file() and p.name not in ("task.json", "answer.txt")
              and "__pycache__" not in p.parts]

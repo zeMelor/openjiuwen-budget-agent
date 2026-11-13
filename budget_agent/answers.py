@@ -1,6 +1,6 @@
 """Нормализация ответа перед записью в answer.txt. Работает без LLM и без токенов.
 
-Что чиним (по разбору стенда, bench/RESULTS.md):
+Что чиним (по разбору прогонов):
 - целое записано как float: «16537.0» -> «16537»;
 - модель написала команду вместо ответа: «echo Lyon > answer.txt» -> «Lyon»;
 - кавычки, обратные кавычки, «Answer: X», точка в конце одного слова, разделители тысяч.
@@ -32,7 +32,7 @@ def _unquote(s: str) -> str:
 
 
 # Ответ из нескольких строк: «Write one company name per line», «Write exactly 3 rows», «print one per line»,
-# «: 4 rows». Раньше всегда бралась последняя строка — на чужом наборе jul-os это ~90 баллов (sql и coding).
+# «: 4 rows». Раньше всегда бралась последняя строка — на стороннем наборе это ~90 баллов (sql и coding).
 # Ищем только в предложениях с глаголом вывода: «The file numbers.txt contains 20 integers, one per line» — это
 # описание входа, а не ответа.
 _MULTI_LINE = re.compile(r"\bper (?:line|row)\b|\bseparate (?:rows?|lines?)\b|\bon (?:separate|its own|their own|"
@@ -48,12 +48,12 @@ def wants_lines(instruction: str | None) -> bool:
     return False
 
 
-# Слово-ответ для coding: «write ONLY the word DONE», «write exactly PASS to answer.txt» (чужой набор chillcoders:
+# Слово-ответ для coding: «write ONLY the word DONE», «write exactly PASS to answer.txt» (сторонний набор:
 # мы всегда писали DONE). Только заглавные: «write ONLY the final answer» не совпадает.
 _DONE_WORD = re.compile(r"\bwrite\s+(?:(?:only|exactly|just)\s+)?(?:the\s+word\s+)?[\"'`]?((?-i:[A-Z][A-Z_]{1,19}))"
                         r"[\"'`]?\s+(?:to|into|in)\s+(?:the\s+file\s+)?(?:\./)?answer\.txt", re.I)
 # Что писать, если задачу решить нельзя, когда условие это говорит: «If the requested value cannot be determined
-# ..., write exactly UNSOLVABLE to answer.txt» (chillcoders). Без такого условия невыполнимую оставляем без ответа.
+# ..., write exactly UNSOLVABLE to answer.txt» (сторонний набор). Без такого условия невыполнимую оставляем без ответа.
 _FAIL_CUE = (r"(?:cannot|can't|can not|could not|couldn't|unable to|impossible|not possible|inconsistent|"
              r"contradict\w*|insufficient|not enough|undetermin\w*|unsolvable|not solvable|no solution|ill-posed)")
 _FAIL_WORD = re.compile(
@@ -90,9 +90,9 @@ def fail_word(instruction: str | None) -> str | None:
 
 
 # «Round to 2 decimals», «rounded to two decimal places», «one decimal point», «exactly two digits after the decimal
-# point»: ответ — ровно столько знаков. Так размечены такие задачи у обеих чужих команд с открытыми наборами
-# (jul-os: «1102.50», «0.3010», «5.0»; chillcoders: «47701.00», «38.50») и на наших hold-c7 («6027.31»). Мы же
-# писали «47701» и «38.5» — все 6 потерь data у chillcoders (13.11). «decimal digits», «21 decimal numbers» — не то.
+# point»: ответ — ровно столько знаков. Так размечены такие задачи в двух сторонних наборах
+# («1102.50», «0.3010», «5.0»; «47701.00», «38.50») и на наших hold-c7 («6027.31»). Мы же
+# писали «47701» и «38.5» — все 6 потерь data на одном из этих наборов (13.11). «decimal digits», «21 decimal numbers» — не то.
 _N_WORDS = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6}
 _N = r"(\d|one|two|three|four|five|six)"
 _DECIMALS = re.compile(r"\bround(?:ed|ing)?\b[^.;?!]{0,60}?\b" + _N + r"\s+decimals?\b"

@@ -69,7 +69,7 @@ TYPE_HINTS = {
         "and docstring intend (e.g. true division for an average), not just what the visible tests need. "
         "Read mylib.py and the tests in one command, fix with one python3 edit, rerun the tests."
     ),
-    # Без шаблона вида '^# Name': модель копирует его дословно (docs/experiments.md).
+    # Без шаблона вида '^# Name': модель копирует его дословно.
     "search": (
         "Hint: grep -ri -A4 with the exact full name prints that record in one call. Look up a referenced "
         "employer or mentor only if the question asks about them (e.g. their city or birth year); if it asks "
@@ -461,7 +461,7 @@ async def solve_coding_audit(task: Task, budget: Budget, model: str, stop_below:
                              max_tokens: int = FAST_MAX_TOKENS) -> tuple[str, int]:
     """Второй проход coding: видимые тесты прошли, модель сверяет код с docstring (coding.AUDIT_RULE). Правка
     остаётся, только если видимые тесты и примеры из docstring по-прежнему проходят. Код до правки сохраняется в
-    snapshot_dir: по нему bench/score.py считает баллы «без второго прохода». Возвращает (исход, вызовов)."""
+    snapshot_dir: по нему стенд считает баллы «без второго прохода». Возвращает (исход, вызовов)."""
     layout = find_layout(task.workdir, task.instruction)
     if layout is None:
         return "n/a", 0
@@ -831,7 +831,7 @@ async def solve(task: Task, budget: Budget, model: str, *, max_iterations: int =
         return await run_bash(cmd, workdir)
 
     # coding в текстовом режиме стабильно отвечает нативным <tool_call>, который прокси вырезает:
-    # для него сразу обычный режим со схемой инструмента (docs/experiments.md).
+    # для него сразу обычный режим со схемой инструмента.
     text_mode = os.environ.get("TOOL_MODE", "text") == "text" and task.task_type != "coding"
     # Выход в 10 раз дороже входа: в текстовом режиме команда короткая, а длинный ответ — это рассуждения
     # в комментариях (на невыполнимой math было 430 токенов). Потолок их обрезает.

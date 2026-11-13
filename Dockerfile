@@ -8,8 +8,8 @@ ENV PYTHONUNBUFFERED=1 \
 
 WORKDIR /app
 
-# Все версии зафиксированы в requirements.lock (pip freeze из этого же базового образа,
-# см. scripts/docker_lock.sh), поэтому ставим без резолвера. uv качает пакеты параллельно:
+# Все версии зафиксированы в requirements.lock (pip freeze из этого же базового образа),
+# поэтому ставим без резолвера. uv качает пакеты параллельно:
 # с обычным pip сборка шла около 8 минут при лимите 1000 с.
 COPY requirements.lock .
 RUN pip install uv==0.12.24 \

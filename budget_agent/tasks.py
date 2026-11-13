@@ -29,7 +29,7 @@ def load_tasks(tasks_dir: Path) -> list[Task]:
         if not meta_path.exists():
             continue
         # Одна кривая задача (не JSON, не объект, битая кодировка, reward не число) не должна ронять весь прогон:
-        # без этой обёртки харнесс падал с exit 1 до первого вызова модели (bench/robust/REPORT.md).
+        # без этой обёртки харнесс падал с exit 1 до первого вызова модели (проверка на битых задачах).
         try:
             meta = json.loads(meta_path.read_text(encoding="utf-8", errors="replace"))
             if not isinstance(meta, dict):
@@ -56,7 +56,7 @@ _DATA_SUFFIXES = {".csv", ".tsv", ".psv", ".json", ".jsonl", ".xlsx", ".xls", ".
 
 def infer_type(task: Task) -> str:
     """Тип не из регламента («sql», «shell», «logic» в чужих наборах): решатель выбираем по файлам задачи. Раньше
-    такие задачи шли к обычному агенту — на 36 задачах sql 15/112 баллов за 11 660 токенов (jul-os), хотя это
+    такие задачи шли к обычному агенту — на 36 задачах sql 15/112 баллов за 11 660 токенов (сторонний набор), хотя это
     задачи по данным в SQLite, которые решатель data уже умеет читать."""
     root = task.workdir
     files = [p for p in root.rglob("*") if p.is_file() and p.name not in ("task.json", "answer.txt")

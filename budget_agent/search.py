@@ -4,7 +4,7 @@
 невыполнимую. Здесь харнесс без токенов берёт карточки, названные в вопросе, и идёт по ссылкам: имя другой
 карточки в тексте — ссылка. Модель видит только эти карточки и отвечает одним вызовом.
 
-Что учтено (bench/search-x1, трудные варианты):
+Что учтено (наш набор search-x1, трудные варианты):
 - заголовок «# Profile: Clara Varga» — имя после двоеточия;
 - псевдонимы: «Also known as: Bill Okafor», «Née | Smith» (Nadia Muller = Nadia Smith);
 - человек без своей карточки (строка в таблице команды): берём карточки, где его имя упомянуто;
@@ -152,7 +152,7 @@ def load_notes(workdir: Path) -> list[Note]:
 
 
 def _name_re(name: str) -> re.Pattern:
-    # Пробелы — любые: заголовок «# Marta  Ruiz» с двумя пробелами не находился по «Marta Ruiz» (chillcoders).
+    # Пробелы — любые: заголовок «# Marta  Ruiz» с двумя пробелами не находился по «Marta Ruiz» (сторонний набор).
     return re.compile(r"(?<![\w])" + r"\s+".join(re.escape(w) for w in name.split()) + r"(?![\w])", re.I)
 
 
@@ -253,7 +253,7 @@ def build_context(question: str, workdir: Path) -> str | None:
 
 
 # Поиск по словам вопроса во всех файлах базы, включая скрытые и форматы без карточек (.log, .ics, .vcf, .ini,
-# .properties, .env): в чужом наборе jul-os ответы лежали в архивных отчётах, заметках встреч, календаре, логах и
+# .properties, .env): в стороннем наборе ответы лежали в архивных отчётах, заметках встреч, календаре, логах и
 # скрытом .vault, а контекст собирался только по карточкам с именами — 7 задач «нет ответа» (−25 баллов).
 MAX_GREP_FILES = 4
 MAX_GREP_FILE_CHARS = 400
@@ -298,7 +298,7 @@ def question_terms(question: str, titles: list[str] = ()) -> list[str]:
 
 def _text_file(p: Path) -> str | None:
     """Текст файла для поиска по словам. Сжатый .gz распаковываем, SQLite выводим строками «таблица: поле=значение»
-    (в jul-os ответы были в archive/notes.txt.gz и registry.db). Прочие двоичные пропускаем."""
+    (в стороннем наборе ответы были в archive/notes.txt.gz и registry.db). Прочие двоичные пропускаем."""
     try:
         if p.stat().st_size > MAX_GREP_BYTES:
             return None

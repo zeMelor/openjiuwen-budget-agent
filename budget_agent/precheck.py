@@ -130,7 +130,7 @@ def _contradictory_tests(task: Task) -> str | None:
                 except (ValueError, SyntaxError, TypeError):
                     continue
                 # Только вызовы с литералами: у len(cart) или self.book.total() между проверками меняется
-                # состояние, и разные ожидания законны (на bench/coding-x1 это дало 2 ложных срабатывания).
+                # состояние, и разные ожидания законны (на нашем наборе coding-x1 это дало 2 ложных срабатывания).
                 if not _pure_call(node.args[0], modules, local):
                     continue
                 key = "eq:" + ast.dump(node.args[0])
@@ -231,7 +231,7 @@ def doubt_reason(task: Task) -> str | None:
 
 def _defined_here(value: str, instruction: str) -> bool:
     """Термин в кавычках, который условие тут же определяет: «the 'greedy' companies: companies selling ...»
-    (jul-os sql_0032 — ложное «невыполнимо»). Это не значение из данных, искать его в файлах не нужно."""
+    (сторонний набор, sql_0032 — ложное «невыполнимо»). Это не значение из данных, искать его в файлах не нужно."""
     m = re.search(r"['\"]" + re.escape(value) + r"['\"]([^.]{0,30})", instruction)
     return bool(m and re.search(r":|\(|\bi\.e\.|\bmeans?\b|\bdefined\b|\bthat is\b|\bcalled\b", m.group(1)))
 

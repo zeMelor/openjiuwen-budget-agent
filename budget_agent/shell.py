@@ -95,7 +95,7 @@ async def run_bash(cmd: str, cwd: Path, timeout: float = CMD_TIMEOUT_S, limit: i
         return "[blocked: stay inside the current directory, use relative paths]"
     # Своя группа процессов: по таймауту убиваем и детей bash. Раньше убивался только bash, а python3 с
     # экспоненциальным fib(90) держал канал вывода, proc.wait() ждал его вечно, и задача умирала по таймауту,
-    # не дойдя до модели (чужой набор jul-os, coding_0012/0020).
+    # не дойдя до модели (сторонний набор, coding_0012/0020).
     proc = await asyncio.create_subprocess_exec(
         BASH, "-c", cmd, cwd=str(cwd), env=_env(),
         stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.STDOUT,
