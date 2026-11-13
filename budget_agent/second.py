@@ -28,7 +28,7 @@ import time
 from dataclasses import dataclass
 
 from .budget import Budget
-from .solver import (Attempt, REASON_MODEL, solve, solve_coding_audit, solve_compute_direct,
+from .solver import (Attempt, REASON_MAX_TOKENS, REASON_MODEL, solve, solve_coding_audit, solve_compute_direct,
                      solve_search_direct)
 from .answers import done_word
 from .tasks import Task
@@ -90,6 +90,14 @@ CAP = {"search_verify": 3500, "search_agent": 1500, "coding": 4000, "coding_audi
        "precheck_verify": 600, "unanswered": UNANSWERED_MAX_TOKENS, "rerun": 1800}
 PRECHECK_VERIFY = os.environ.get("PRECHECK_VERIFY", "1") == "1"
 CODING_AUDIT = os.environ.get("CODING_AUDIT", "1") == "1"
+# Сверку coding с docstring делает модель с рассуждениями, если на неё хватает излишка. На регрессе на одних и тех
+# же состояниях после первого прохода (13.11): без рассуждений 21 -> 25 из 38 (испортила верное банковское
+# округление: round() заменила на «половина вверх»), с рассуждениями 21 -> 29 (то округление не тронула, починила
+# LRU с O(1)) — ~1 900 токенов и ~45 с на задачу против ~200. Излишка нет — прежняя сверка без рассуждений.
+# Порог считается вместе с уже идущими такими сверками: параллельные не проедают резерв. AUDIT_REASON=0 выключает.
+AUDIT_REASON = os.environ.get("AUDIT_REASON", "1") == "1"
+AUDIT_REASON_CAP = 4000.0
+_audit_reason_inflight = 0.0
 # 12.11: на 44 задачах регресса и hold-a1 эти перепроверки дали +0 за 5 549 токенов.
 # Подозрительные ответы и отказы остаются в очереди. Прежний режим — COMPUTE_PLAIN_VERIFY=1.
 COMPUTE_PLAIN_VERIFY = os.environ.get("COMPUTE_PLAIN_VERIFY", "0") == "1"
@@ -264,7 +272,9 @@ async def _retry_unanswered(task: Task, budget: Budget, cap: float, traj) -> tup
     return att.answer, "changed", calls
 
 
-async def recheck(c: Candidate, budget: Budget, model: str, traj_dir) -> tuple[str | None, str, int]:
+async def recheck(c: Candidate, budget: Budget, model: str, traj_dir,
+                  keep: float = float("inf")) -> tuple[str | None, str, int]:
+    global _audit_reason_inflight
     task, att = c.task, c.att
     traj = None
     if traj_dir is not None:
@@ -286,7 +296,16 @@ async def recheck(c: Candidate, budget: Budget, model: str, traj_dir) -> tuple[s
 
     if c.kind == "coding_audit":
         snap = traj_dir.parent / "pass1" / task.task_id if traj_dir is not None else None
-        result, calls = await solve_coding_audit(task, budget, model, STOP_BELOW, cap, traj, snap)
+        if AUDIT_REASON and budget.remaining - keep - _audit_reason_inflight >= AUDIT_REASON_CAP:
+            _audit_reason_inflight += AUDIT_REASON_CAP
+            try:
+                result, calls = await solve_coding_audit(task, budget, REASON_MODEL, STOP_BELOW,
+                                                         before + AUDIT_REASON_CAP, traj, snap,
+                                                         max_tokens=REASON_MAX_TOKENS)
+            finally:
+                _audit_reason_inflight -= AUDIT_REASON_CAP
+        else:
+            result, calls = await solve_coding_audit(task, budget, model, STOP_BELOW, cap, traj, snap)
         return att.answer, result, calls
 
     if c.kind == "precheck_verify":
@@ -331,7 +350,7 @@ async def run_second_pass(first: dict[str, tuple[Task, Attempt]], budget: Budget
             before = budget.by_task.get(tid, 0.0)
             t0 = time.monotonic()
             try:
-                answer, result, calls = await asyncio.wait_for(recheck(c, budget, model, traj_dir),
+                answer, result, calls = await asyncio.wait_for(recheck(c, budget, model, traj_dir, keep),
                                                                min(task_timeout * 2, max(time_left(), 1.0)))
             except Exception as e:  # перепроверка не должна ронять прогон: исходный ответ остаётся
                 log(f"{tid}: second pass error {type(e).__name__}: {e}")
