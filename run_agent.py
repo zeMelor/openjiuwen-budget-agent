@@ -1,7 +1,8 @@
 """Точка входа харнесса: python run_agent.py --tasks-dir DIR
 
 В контейнере: python /app/run_agent.py --tasks-dir /data/tasks
-Окружение: LLM_BASE_URL, LLM_API_KEY (обязательно), OUT (необязательно: файл или каталог для сводки решений).
+Окружение: LLM_BASE_URL, LLM_API_KEY (обязательно), OUT (необязательно: файл или каталог для сводки решений;
+в каталог пишутся ещё <каталог задачи>/answer.txt), BUDGET, TASKS (если нет --tasks-dir).
 """
 from __future__ import annotations
 
@@ -26,28 +27,44 @@ def load_dotenv(path: Path) -> None:
             os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
 
 
+def parse_budget(raw: str | None) -> float | None:
+    """«100000», «100_000», «100k» -> число; кривое значение -> None."""
+    raw = (raw or "").strip().replace("_", "").replace(" ", "")
+    if not raw:
+        return None
+    mult = 1000.0 if raw[-1] in "kK" else 1.0
+    try:
+        value = float(raw.rstrip("kK")) * mult
+    except ValueError:
+        return None
+    return value if 0 < value < float("inf") else None
+
+
 def env_budget(default: float = 100_000.0) -> float:
     """Бюджет из окружения: TOKEN_BUDGET (наше имя) или BUDGET (так бюджет передают при проверке).
     Кривое значение не должно ронять прогон: тогда 100k."""
     for name in ("TOKEN_BUDGET", "BUDGET"):
-        raw = os.environ.get(name, "").strip().replace("_", "").replace(" ", "")
-        if not raw:
-            continue
-        mult = 1000.0 if raw[-1] in "kK" else 1.0
-        try:
-            value = float(raw.rstrip("kK")) * mult
-        except ValueError:
-            continue
-        if value > 0 and value != float("inf"):
+        value = parse_budget(os.environ.get(name))
+        if value:
             return value
     return default
 
 
-def parse_args() -> argparse.Namespace:
-    p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--tasks-dir", required=True, type=Path)
-    p.add_argument("--out", default=os.environ.get("OUT"), help="файл или каталог для сводки решений")
-    p.add_argument("--budget", type=float, default=env_budget())
+# Неизвестный параметр с одним из этих слов в имени считаем файлом или каталогом для решений: регламент говорит,
+# что проект «получает в параметрах имя папки с задачами и имя файла для сохраненных решений», а имя параметра
+# не названо.
+OUT_WORDS = ("out", "answer", "solution", "result")
+
+
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    """Разбор терпимый: лишний или незнакомый параметр в команде запуска не должен ронять прогон (строгий argparse
+    завершился бы с кодом 2 до первой задачи). Незнакомое пишется в журнал; каталог задач, бюджет и файл решений
+    узнаются и по другим именам, каталог задач — ещё из TASKS и /data/tasks."""
+    p = argparse.ArgumentParser(description=__doc__, allow_abbrev=False)
+    p.add_argument("--tasks-dir", "--tasks", "--task-dir", dest="tasks_dir", type=Path, default=None)
+    p.add_argument("--out", "--output", "--out-file", "--output-file", "-o", dest="out", default=None,
+                   help="файл или каталог для сводки решений (по умолчанию OUT)")
+    p.add_argument("--budget", default=None, help="бюджет токенов (по умолчанию BUDGET или 100k)")
     p.add_argument("--model", default=os.environ.get("MODEL", "qwen3.8-27b-noreason"))
     # Регламент разрешает 5 сессий, но у тарифа NeuralDeep потолок 3 одновременных запроса на аккаунт.
     p.add_argument("--parallel", type=int, default=int(os.environ.get("PARALLEL", 3)))
@@ -65,7 +82,54 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--no-compute-verify", dest="compute_verify", action="store_false",
                    default=os.environ.get("COMPUTE_VERIFY", "1") == "1",
                    help="во втором проходе не перепроверять math и data")
-    return p.parse_args()
+    args, extra = p.parse_known_args(argv)
+    notes: list[str] = []
+    args.budget = parse_budget(args.budget) if args.budget is not None else None
+    positional: list[str] = []
+    i = 0
+    while i < len(extra):
+        tok = extra[i]
+        if tok.startswith("-") and len(tok) > 1:
+            name, eq, val = tok.partition("=")
+            if not eq and i + 1 < len(extra) and not extra[i + 1].startswith("-"):
+                i += 1
+                val = extra[i]
+            low = name.lower()
+            if val and "task" in low and args.tasks_dir is None:
+                args.tasks_dir = Path(val)
+                notes.append(f"{name} {val}: tasks dir")
+            elif val and "budget" in low and parse_budget(val) and args.budget is None:
+                args.budget = parse_budget(val)
+                notes.append(f"{name} {val}: budget")
+            elif val and any(w in low for w in OUT_WORDS) and args.out is None:
+                args.out = val
+                notes.append(f"{name} {val}: solutions file")
+            else:
+                notes.append(f"ignored {name}" + (f" {val}" if val else ""))
+        else:
+            positional.append(tok)
+        i += 1
+    for tok in positional:
+        if args.tasks_dir is None and Path(tok).is_dir():
+            args.tasks_dir = Path(tok)
+            notes.append(f"{tok}: tasks dir")
+        elif args.out is None:
+            args.out = tok
+            notes.append(f"{tok}: solutions file")
+        else:
+            notes.append(f"ignored {tok}")
+    if args.tasks_dir is None:
+        for cand in (os.environ.get("TASKS"), "/data/tasks"):
+            if cand and Path(cand).is_dir():
+                args.tasks_dir = Path(cand)
+                notes.append(f"no --tasks-dir: using {cand}")
+                break
+    if args.out is None:
+        args.out = os.environ.get("OUT") or None
+    if args.budget is None:
+        args.budget = env_budget()
+    args.arg_notes = notes
+    return args
 
 
 def log(msg: str) -> None:
@@ -88,6 +152,33 @@ def save_solutions(path: Path | None, solutions: dict[str, str]) -> None:
         tmp.replace(path)
     except OSError as e:
         log(f"cannot write solutions to {path}: {e}")
+
+
+def mirror_answer(out_dir: Path | None, task_dir_name: str, text: str) -> None:
+    """OUT — каталог: кроме solutions.json пишем туда <каталог задачи>/answer.txt, как в каталоге задач. Страховка
+    на случай, если каталог задач смонтирован без права записи для контейнера."""
+    if out_dir is None:
+        return
+    try:
+        d = out_dir / task_dir_name
+        d.mkdir(parents=True, exist_ok=True)
+        (d / "answer.txt").write_text(text.strip() + "\n", encoding="utf-8")
+    except OSError as e:
+        log(f"cannot write {out_dir / task_dir_name / 'answer.txt'}: {e}")
+
+
+def can_write(d: Path) -> bool:
+    """Можно ли создать файл в каталоге: пробный файл создаём и сразу удаляем."""
+    probe = d / f".write_probe_{os.getpid()}"
+    try:
+        probe.write_text("", encoding="utf-8")
+    except OSError:
+        return False
+    try:
+        probe.unlink()
+    except OSError:
+        pass
+    return True
 
 
 async def main_async(args: argparse.Namespace) -> None:
@@ -114,8 +205,15 @@ async def main_async(args: argparse.Namespace) -> None:
         tasks = [t for t in tasks if t.task_id in set(args.only)]
     budget = Budget(limit=args.budget, log_path=log_dir / "calls.jsonl")
     sol_path = solutions_path(args.out)
+    out_dir = Path(args.out) if args.out and Path(args.out).is_dir() else None
     solutions: dict[str, str] = {}
+    unwritten: set[str] = set()  # задачи, чей answer.txt не записался ни в каталог задачи, ни в workspace/
     log(f"{len(tasks)} tasks, budget {args.budget:.0f}, model {args.model}, logs in {log_dir}")
+    if tasks and not (can_write(tasks[0].dir) or can_write(tasks[0].workdir)):
+        log(f"WARNING: cannot create files in {tasks[0].dir}: answer.txt may not be saved; answers also go to "
+            f"{sol_path or 'nowhere else (OUT is not set)'} and to this log")
+    if sol_path is not None:
+        log(f"solutions also go to {sol_path}" + (f" and {out_dir}/<task>/answer.txt" if out_dir else ""))
     if os.environ.get("BASE_URL_PROBE", "1") == "1":
         # Адрес без «/v1» дал бы 404 на каждом вызове (budget_agent/endpoint.py).
         from budget_agent.endpoint import resolve_base_url
@@ -130,14 +228,22 @@ async def main_async(args: argparse.Namespace) -> None:
         with (log_dir / "results.jsonl").open("a", encoding="utf-8") as f:
             f.write(json.dumps(row, ensure_ascii=False) + "\n")
 
+    def emit(task, answer: str) -> None:
+        """Ответ — в каталог задачи и workspace/, в сводку OUT и в зеркало OUT/<задача>/answer.txt."""
+        if write_answer(task, answer, log):
+            unwritten.discard(task.task_id)
+        else:
+            unwritten.add(task.task_id)
+        solutions[task.task_id] = answer
+        save_solutions(sol_path, solutions)
+        mirror_answer(out_dir, task.dir.name, answer)
+
     def mark_unsolvable(task) -> None:
         # Условие само говорит, что писать, если решить нельзя («write exactly UNSOLVABLE»): пишем это слово.
         # Без такого условия невыполнимую оставляем без ответа. Второй проход может заменить его настоящим ответом.
         word = fail_word(task.instruction)
         if word:
-            write_answer(task, word, log)
-            solutions[task.task_id] = word
-            save_solutions(sol_path, solutions)
+            emit(task, word)
             log(f"{task.task_id}: no answer, the task says to write {word!r}")
 
     # Проверки «невыполнимо» без LLM. Жёсткие (противоречивые тесты, нет модуля) — задачу не запускаем вообще.
@@ -173,9 +279,7 @@ async def main_async(args: argparse.Namespace) -> None:
 
     def on_answer(task, answer: str) -> None:
         answer = apply_decimals(task.instruction, answer)  # «round to 2 decimals» -> ровно 2 знака (answers.py)
-        write_answer(task, answer, log)
-        solutions[task.task_id] = answer
-        save_solutions(sol_path, solutions)
+        emit(task, answer)
 
     async def worker(task) -> None:
         async with sem:
@@ -238,6 +342,10 @@ async def main_async(args: argparse.Namespace) -> None:
                               prechecked=[t for t in tasks if t.task_id in skipped])
     log(f"done: {len(solutions)}/{len(tasks)} answered, spent {budget.spent:.0f} in {budget.calls} calls, "
         f"{time.monotonic() - started:.0f}s")
+    if unwritten:
+        log(f"WARNING: answer.txt not saved for {len(unwritten)} tasks: {sorted(unwritten)}")
+    # Все ответы одной строкой: если файлы записать не удалось, ответы остаются хотя бы в журнале контейнера.
+    log("answers: " + json.dumps(solutions, ensure_ascii=False, sort_keys=True))
     from budget_agent.solver import RATE
     if RATE.waited:
         log(f"rate limit {RATE.rpm}/min: waited {RATE.waited:.0f}s in total")
@@ -248,6 +356,10 @@ def main() -> None:
     sys.path.insert(0, str(root))
     load_dotenv(root / ".env")
     args = parse_args()
+    for note in args.arg_notes:
+        log(f"args: {note}")
+    if args.tasks_dir is None:
+        sys.exit("tasks dir is not set: --tasks-dir DIR (or TASKS)")
     for var in ("LLM_BASE_URL", "LLM_API_KEY"):
         if not os.environ.get(var):
             sys.exit(f"{var} is not set")
